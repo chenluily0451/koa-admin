@@ -30,6 +30,7 @@
     </div>
 </template>
 <script>
+    import req from "../router/request"
     export default {
         name: 'Register',
         data() {
@@ -104,7 +105,7 @@
                 });
             },
             registRequest(data){
-                this.axios.post("api",{data}).then((response)  =>{
+                this.axios.get(req.register,{params: {data}}).then((response)  =>{
                     console.log(response.data)
                 })
             }
