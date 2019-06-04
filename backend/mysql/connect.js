@@ -1,16 +1,61 @@
-var mysql = require('mysql');
-var conn = mysql.createConnection({
-    host: 'localhost',
+import sqls from './sqls';
+const mysql = require('mysql');
+const conn = mysql.createConnection({
+    host: '127.0.0.1',
     user: '',
     password: '',
     database:'koaAdmin',
     port: 3306
-});
+},);
+
 conn.connect();
-conn.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-    if (err) throw err;
-    console.log('The solution is: ', rows[0].solution);
-});
+console.log(111111111111111)
+// 查询重复
+const register_search_sql = function(mobile){
+    let re = {}
+    return new Promise(function (resolve, reject) {
+        conn.query(sqls.search_sql(mobile),"",function (err,res) {
+            console.log(sqls.search_sql(mobile))
+            if(err){console.log(err)}
+            console.log(res)
+            if(res.length > 0){
+                re["msg"] =  "该手机号已注册，请更换手机号"
+            }else{
+                re["msg"] =  "";
+            }
+            resolve(re);
+        });
+    });
+
+}
+
+// 插入t_user
+const register_insert_sql = function(name,mobile,password,address){
+    let re = {}
+    return new Promise(function(resolve,reject){
+        conn.query(sqls.insert_sql(name,mobile,password,address),"",function (err,res) {
+            console.log(sqls.insert_sql(name,mobile,password,address))
+            if(err){console.log(err)}
+            console.log("res123123",res)
+            if(res.affectedRows != 1){
+                re["msg"] =  "注册失败"
+            }else{
+                re["msg"] = ""
+            }
+            resolve(re);
+        });
+    })
+
+}
+
+
+
+
+
+
+
+
+
 
 // conn.query(deleteSQL, function (err0, res0) {
 //     if (err0) console.log(err0);
@@ -52,8 +97,6 @@ conn.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 //     });
 // });
 
-conn.end();
 
+export {register_search_sql,register_insert_sql};
 
-
-export default conn;
