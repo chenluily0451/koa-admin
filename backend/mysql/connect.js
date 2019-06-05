@@ -56,7 +56,6 @@ const register_insert_sql = function(name,mobile,password,address){
 
 
 
-
 // conn.query(deleteSQL, function (err0, res0) {
 //     if (err0) console.log(err0);
 //     console.log("DELETE Return ==> ");

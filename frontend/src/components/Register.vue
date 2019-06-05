@@ -106,7 +106,9 @@
             },
             registRequest(data){
                 this.axios.get(req.register,{params: {data}}).then((response)  =>{
-                    console.log(response.data)
+                    this.$alert(response.data.msg, '提示', {
+                        confirmButtonText: '确定'
+                    });
                 })
             }
         }
