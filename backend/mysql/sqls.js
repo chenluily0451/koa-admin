@@ -7,6 +7,9 @@ const sqls = {
     },
     "login_search_sql" : function (mobile,password) {
         return "select * from t_user where mobile = " + mobile + " and password =" + password
+    },
+    "getuserlist_sql" : function () {
+        return "select * from t_user"
     }
 }
 

@@ -53,7 +53,7 @@ const login_search_sql = function (mobile,password) {
     return new Promise(function (resolve,reject) {
 
         conn.query(sqls.login_search_sql(mobile,password),"",function (err,res) {
-            console.log(sqls.login_search_sql(mobile,password))
+            console.log("sqls.login_search_sql(mobile,password)",sqls.login_search_sql(mobile,password))
             if(err){console.log(err)}
             console.log(res)
             if(res.length > 0){
@@ -66,10 +66,29 @@ const login_search_sql = function (mobile,password) {
     })
 }
 
+// 查询用户列表
+
+const getuserlist_sql = function (mobile,password) {
+    let re = []
+    return new Promise(function (resolve,reject) {
+        conn.query(sqls.getuserlist_sql(),"",function (err,res) {
+            console.log("sqls.getuserlist_sql()",sqls.getuserlist_sql())
+            if(err){console.log(err)}
+            // console.log("res",res)
+            res.forEach((val,i)=>{
+                re.push(val)
+            })
+            resolve(re);
+        });
+    })
+}
+
+
 
 export {
     register_search_sql,
     register_insert_sql,
-    login_search_sql
+    login_search_sql,
+    getuserlist_sql
 };
 

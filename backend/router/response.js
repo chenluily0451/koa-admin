@@ -2,9 +2,17 @@
 const res = {
      "res_success" : (msg)=>{
         return{
-           status:200,
-           result:"success",
-           msg:msg
+            status:200,
+            result:"success",
+            msg:msg
+        }
+    },
+    "res_success_data" : (msg,data)=>{
+        return{
+            status:200,
+            result:"success",
+            msg:msg,
+            data:data
         }
     },
     "res_error400" : (msg)=>{

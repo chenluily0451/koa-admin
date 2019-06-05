@@ -27,7 +27,7 @@ router.get('/api/register', async function (ctx, next) {
 
     }
 
-})
+});
 
 // 登录
 router.post('/api/login', async function (ctx, next) {
@@ -44,6 +44,13 @@ router.post('/api/login', async function (ctx, next) {
             ctx.body = res.res_success("登录成功")
         }
     }
-})
+});
+
+// 获取用户列表
+router.get('/api/getUserList', async function (ctx, next) {
+    let getuserlist_result = await co.getuserlist_sql();
+    console.log("getuserlist_result",getuserlist_result)
+    ctx.body = res.res_success_data("返回成功",getuserlist_result)
+});
 
 export default router;
