@@ -1,6 +1,8 @@
-import res from './response'
+import res from './response';
 const router = require('koa-router')();
-import * as co from "../mysql/connect"
+// 解析request的body的功能(post请求)
+
+import * as co from "../mysql/connect";
 
 
 // 注册
@@ -25,6 +27,23 @@ router.get('/api/register', async function (ctx, next) {
 
     }
 
+})
+
+// 登录
+router.post('/api/login', async function (ctx, next) {
+    let req = ctx.request.body
+    if(!req.mobile || !req.password){
+        ctx.body = res.res_error400("参数错误")
+
+    }else{
+        let login_search_result = await co.login_search_sql(req.mobile,req.password);
+        console.log("login_search_result",login_search_result);
+        if(login_search_result.msg.length>0){
+            ctx.body = res.res_error401(login_search_result.msg)
+        }else{
+            ctx.body = res.res_success("登录成功")
+        }
+    }
 })
 
 export default router;

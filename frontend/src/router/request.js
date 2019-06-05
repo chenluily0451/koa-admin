@@ -1,5 +1,6 @@
 const req = {
-    register:"/api/register"
+    register:"/api/register",
+    login:"/api/login"
 }
 
 export default req;

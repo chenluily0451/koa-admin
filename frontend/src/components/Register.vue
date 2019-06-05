@@ -17,7 +17,7 @@
                             <el-input v-model.trim="form.repassword" type="password" placeholder="请输入确认密码"></el-input>
                         </el-form-item>
                         <el-form-item label="地址详情">
-                            <el-input type="textarea" placeholder="请输入地址" v-model="form.desc"></el-input>
+                            <el-input type="textarea" placeholder="请输入地址" v-model="form.address"></el-input>
                         </el-form-item>
                         <el-form-item class="btn-wrap">
                             <el-button type="primary" @click="submitForm('form')">立即创建</el-button>
@@ -30,7 +30,8 @@
     </div>
 </template>
 <script>
-    import req from "../router/request"
+    import req from "../router/request";
+
     export default {
         name: 'Register',
         data() {
@@ -71,7 +72,7 @@
                     mobile:'18221136691',
                     password:'123456',
                     repassword:'123456',
-                    desc: 'shanghai'
+                    address: 'shanghai'
                 },
                 rules: {
                     name: [
