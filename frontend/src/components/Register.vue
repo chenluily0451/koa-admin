@@ -21,7 +21,7 @@
                         </el-form-item>
                         <el-form-item class="btn-wrap">
                             <el-button type="primary" @click="submitForm('form')">立即创建</el-button>
-                            <el-button>取消</el-button>
+                            <el-button @click="cancel()">取消</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -107,10 +107,20 @@
             },
             registRequest(data){
                 this.axios.get(req.register,{params: {data}}).then((response)  =>{
+                    console.log(response)
                     this.$alert(response.data.msg, '提示', {
-                        confirmButtonText: '确定'
+                        confirmButtonText: '确定',
+                        callback:action =>{
+                            if (response.data.status == 200){
+                                this.$router.push("./login");
+                            }
+                        }
                     });
+
                 })
+            },
+            cancel(){
+                this.$router.push("/login")
             }
         }
     }

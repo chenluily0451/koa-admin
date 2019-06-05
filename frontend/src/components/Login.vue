@@ -12,6 +12,7 @@
                         </el-form-item>
                         <el-form-item class="btn-wrap">
                             <el-button type="primary" @click="submitForm('form')">登录</el-button>
+                            <el-button type="primary" @click="gotoRegister()">注册</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -60,6 +61,9 @@
                         return false;
                     }
                 });
+            },
+            gotoRegister(){
+                this.$router.push("/register")
             },
             loginRequest(data){
                 this.axios.post(req.login,data).then((response)  =>{
