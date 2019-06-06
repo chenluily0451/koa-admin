@@ -23,6 +23,12 @@ const sqls = {
     },
     "deleteuserlist_sql" : function (id) {
         return "delete  from t_user where id = " + id
+    },
+    "updateuser_sql" : function (id,name,password,address) {
+        return "update t_user set name='" +  name + "', password = " + password + ", address = '" + address + "' where id = " + id
+    },
+    "getuserinfo_sql" : function (id) {
+        return "select name,mobile,password,address from t_user where id =" + id
     }
 }
 

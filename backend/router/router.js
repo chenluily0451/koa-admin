@@ -68,7 +68,36 @@ router.post('/api/deleteUserList', async function (ctx, next) {
             ctx.body = res.res_success("删除成功",deleteuserlist_result)
         }
     }
-
 });
+
+// 更新用户表
+router.post("/api/updateUser",async  function (ctx,next) {
+    let req = ctx.request.body;
+    console.log(req)
+    if(!req.id){
+        ctx.body = res.res_error400("参数错误")
+    }else{
+        let updateuser_result = await co.updateuser_sql(req.id,req.name,req.password,req.address);
+        if(updateuser_result.msg.length>0){
+            ctx.body = res.res_error401(updateuser_result.msg)
+        }else{
+            ctx.body = res.res_success("更新成功",updateuser_result)
+        }
+    }
+});
+
+// 通过id获取用户信息
+router.get("/api/getuserinfo", async function (ctx,next) {
+    let req_query = ctx.request.query;
+    if(!req_query.id){
+        ctx.body = res.res_error400("参数错误")
+    }else{
+        let getuserinfo_result = await co.getuserinfo_sql(req_query.id);
+        console.log("getuserinfo_result",getuserinfo_result);
+        ctx.body = res.res_success_data("查询成功",getuserinfo_result)
+
+    }
+})
+
 
 export default router;

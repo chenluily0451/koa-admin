@@ -78,7 +78,7 @@ const login_search_sql = function (mobile,password) {
 // 查询用户列表
 
 const getuserlist_sql = function (mobile,password) {
-    let re = []
+    let re = [];
     return new Promise(function (resolve,reject) {
         conn.query(sqls.getuserlist_sql(),"",function (err,res) {
             console.log("sqls.getuserlist_sql()",sqls.getuserlist_sql())
@@ -94,7 +94,7 @@ const getuserlist_sql = function (mobile,password) {
 
 // 删除用户表
 const deleteuserlist_sql = function (id) {
-    let re = []
+    let re = [];
     return new Promise(function (resolve,reject) {
         conn.query(sqls.deleteuserlist_sql(id),"",function (err,res) {
             console.log("sqls.deleteuserlist_sql",sqls.deleteuserlist_sql(id))
@@ -109,12 +109,47 @@ const deleteuserlist_sql = function (id) {
     })
 }
 
+// 更新用户表
+const updateuser_sql = function (id,name,mobile,password,address) {
+    let re = {};
+
+    return new Promise(function(resolve,reject){
+        conn.query(sqls.updateuser_sql(id,name,mobile,password,address),"",function (err,res) {
+            console.log(sqls.updateuser_sql(id,name,mobile,password,address))
+            if(err){console.log(err)}
+            console.log(res)
+            if(res.affectedRows != 1){
+                re["msg"] =  "更新失败"
+            }else{
+                re["msg"] = ""
+            }
+            resolve(re);
+        });
+    })
+
+}
+
+// 获取用户信息
+const getuserinfo_sql = function (id) {
+    let re = "";
+    return new Promise(function (resolve, reject) {
+        conn.query(sqls.getuserinfo_sql(id),"",function (err,res) {
+            console.log(sqls.getuserinfo_sql(id))
+            if(err){console.log(err)}
+            re = res
+            resolve(re);
+        });
+    })
+}
+
 
 export {
     register_search_sql,
     register_insert_sql,
     login_search_sql,
     getuserlist_sql,
-    deleteuserlist_sql
+    deleteuserlist_sql,
+    updateuser_sql,
+    getuserinfo_sql
 };
 
