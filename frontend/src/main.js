@@ -19,3 +19,33 @@ new Vue({
   router,
   axios
 }).$mount('#app')
+
+
+axios.interceptors.response.use(
+    response=> {
+      if(response.status != 200 || response.data.status != 200) {
+        Vue.prototype.$message({
+          type:'error',
+          message:'出错'
+        });
+      }
+      return response;
+    },
+    (error) => {
+      return Promise.reject(error)
+    }
+)
+// axios.interceptors.request.use(
+//     response=> {
+//       if(response.status != 200 || response.data.status != 200) {
+//         Vue.prototype.$message({
+//           type:'error',
+//           message:'出错'
+//         });
+//       }
+//       return response;
+//     },
+//     (error) => {
+//       return Promise.reject(error)
+//     }
+// )
