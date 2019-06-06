@@ -37,8 +37,8 @@
             };
             return {
                 form: {
-                    mobile:'18221136691',
-                    password:'123456',
+                    mobile:'',
+                    password:'',
                 },
                 rules: {
 

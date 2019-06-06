@@ -59,7 +59,6 @@
                 if (value === '') {
                     callback(new Error('请再次输入密码'));
                 } else if (value !== this.form.password) {
-                    console.log(this.form.password)
                     callback(new Error('两次输入密码不一致!'));
                 } else {
                     callback();
@@ -68,11 +67,11 @@
 
             return {
                 form: {
-                    name: 'chenlu',
-                    mobile:'18221136691',
-                    password:'123456',
-                    repassword:'123456',
-                    address: 'shanghai'
+                    name: '',
+                    mobile:'',
+                    password:'',
+                    repassword:'',
+                    address: ''
                 },
                 rules: {
                     name: [
