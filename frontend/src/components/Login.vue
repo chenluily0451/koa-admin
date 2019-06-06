@@ -67,15 +67,20 @@
             },
             loginRequest(data){
                 this.axios.post(req.login,data).then((response)  =>{
-                    if (response.status == 200){
-                        localStorage.setItem("userStorage","temp")
+                    if (response.data.status == 200){
+                        localStorage.setItem("userStorage","temp");
+                        this.$alert(response.data.msg, '提示', {
+                            confirmButtonText: '确定',
+                            callback:() =>{
+                                this.$router.push("./list");
+                            }
+                        });
+                        return;
                     }
                     this.$alert(response.data.msg, '提示', {
-                        confirmButtonText: '确定',
-                        callback:action =>{
-                            this.$router.push("./list");
-                        }
+                        confirmButtonText: '确定'
                     });
+
                 })
             }
         }

@@ -7,7 +7,10 @@ import List from "../components/List"
 const routes = [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/list', component: List }
+    { path: '/list', component: List },
+    {
+        path:'/', redirect:'/login'
+    }
 ]
 
 const router = new VueRouter({

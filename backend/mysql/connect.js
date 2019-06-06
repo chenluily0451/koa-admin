@@ -9,7 +9,16 @@ const conn = mysql.createConnection({
 },);
 
 conn.connect();
-console.log(111111111111111)
+
+// init database table;
+conn.query(sqls.init_sql(),"",function (err,res) {
+    console.log(sqls.init_sql())
+    if(err){console.log(err)}
+    else{
+        console.log("初始化成功")
+    }
+});
+
 // 查询重复
 const register_search_sql = function(mobile){
     let re = {}

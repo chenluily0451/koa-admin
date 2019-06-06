@@ -1,9 +1,13 @@
 <template>
     <div>
         <div class="mainContent">
+            <div class="btnWrap">
+                <el-button @click="quit()" class="quit">退出</el-button>
+            </div>
+
             <el-collapse  accordion>
                 <template v-for="(item,index) in userList">
-                    <el-collapse-item :title=item.mobile>
+                    <el-collapse-item :title=item.mobile v-bind:key=index>
                         <div>ID：{{item.id}}</div>
                         <div>姓名：{{item.name}}</div>
                         <div>地址：{{item.address}}</div>
@@ -27,7 +31,10 @@
             }
         },
         methods: {
-
+            "quit":function () {
+                localStorage.clear();
+                this.$router.push("/")
+            }
         },
         mounted() {
             this.axios.get(req.getUserList).then((response)  =>{
@@ -40,3 +47,9 @@
         }
     }
 </script>
+<style lang="scss" scoped>
+    .btnWrap{
+        text-align: right;
+        margin-bottom: 20px;
+    }
+</style>
