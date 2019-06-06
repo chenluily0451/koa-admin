@@ -67,11 +67,11 @@
 
             return {
                 form: {
-                    name: '',
-                    mobile:'',
-                    password:'',
-                    repassword:'',
-                    address: ''
+                    name: '小面',
+                    mobile:'13000000001',
+                    password:'123456',
+                    repassword:'123456',
+                    address: 'Shanghai'
                 },
                 rules: {
                     name: [
@@ -109,7 +109,7 @@
                     console.log(response)
                     this.$alert(response.data.msg, '提示', {
                         confirmButtonText: '确定',
-                        callback:action =>{
+                        callback:() =>{
                             if (response.data.status == 200){
                                 this.$router.push("./login");
                             }

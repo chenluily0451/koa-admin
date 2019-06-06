@@ -53,4 +53,22 @@ router.get('/api/getUserList', async function (ctx, next) {
     ctx.body = res.res_success_data("返回成功",getuserlist_result)
 });
 
+
+// 删除用户表
+router.post('/api/deleteUserList', async function (ctx, next) {
+    let req = ctx.request.body;
+    if(!req.id){
+        ctx.body = res.res_error400("参数错误")
+    }else{
+        let deleteuserlist_result = await co.deleteuserlist_sql(req.id);
+        console.log("deleteuserlist_result",deleteuserlist_result)
+        if(deleteuserlist_result.msg.length>0){
+            ctx.body = res.res_error401(deleteuserlist_result.msg)
+        }else{
+            ctx.body = res.res_success("删除成功",deleteuserlist_result)
+        }
+    }
+
+});
+
 export default router;

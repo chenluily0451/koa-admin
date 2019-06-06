@@ -92,12 +92,29 @@ const getuserlist_sql = function (mobile,password) {
     })
 }
 
+// 删除用户表
+const deleteuserlist_sql = function (id) {
+    let re = []
+    return new Promise(function (resolve,reject) {
+        conn.query(sqls.deleteuserlist_sql(id),"",function (err,res) {
+            console.log("sqls.deleteuserlist_sql",sqls.deleteuserlist_sql(id))
+            if(err){console.log(err)}
+            if(res.affectedRows != 1){
+                re["msg"] =  "删除失败"
+            }else{
+                re["msg"] =  ""
+            }
+            resolve(re);
+        });
+    })
+}
 
 
 export {
     register_search_sql,
     register_insert_sql,
     login_search_sql,
-    getuserlist_sql
+    getuserlist_sql,
+    deleteuserlist_sql
 };
 

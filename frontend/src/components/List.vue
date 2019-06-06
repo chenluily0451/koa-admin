@@ -4,13 +4,13 @@
             <div class="btnWrap">
                 <el-button @click="quit()" class="quit">退出</el-button>
             </div>
-
             <el-collapse  accordion>
                 <template v-for="(item,index) in userList">
                     <el-collapse-item :title=item.mobile v-bind:key=index>
                         <div>ID：{{item.id}}</div>
                         <div>姓名：{{item.name}}</div>
                         <div>地址：{{item.address}}</div>
+                        <div class="control">操作：<el-button @click="del(item.id,index)" class="quit">删除</el-button></div>
                     </el-collapse-item>
                 </template>
             </el-collapse>
@@ -34,6 +34,25 @@
             "quit":function () {
                 localStorage.clear();
                 this.$router.push("/")
+            },
+            "del":function (id,index) {
+                this.$confirm('是否删除此用户?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(()=>{
+                    console.log(id)
+                    this.axios.post(req.del,{id:id}).then((response)  =>{
+                        if(response.data.status == 200){
+                            this.userList.splice(index,1);
+                            this.$message({
+                                type: 'success',
+                                message: response.data.msg
+                            });
+                        }
+                    })
+
+                });
             }
         },
         mounted() {
@@ -51,5 +70,10 @@
     .btnWrap{
         text-align: right;
         margin-bottom: 20px;
+    }
+    .control{
+        .quit{
+            float: right;
+        }
     }
 </style>

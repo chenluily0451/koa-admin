@@ -20,6 +20,9 @@ const sqls = {
     },
     "getuserlist_sql" : function () {
         return "select * from t_user"
+    },
+    "deleteuserlist_sql" : function (id) {
+        return "delete  from t_user where id = " + id
     }
 }
 
