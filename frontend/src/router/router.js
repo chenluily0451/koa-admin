@@ -2,15 +2,15 @@ import VueRouter from 'vue-router'
 import Login from "../components/Login"
 import Register from "../components/Register"
 import List from "../components/List"
+import ModifyUserInfo from "../components/ModifyUserInfo"
 
 
 const routes = [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/list', component: List },
-    {
-        path:'/', redirect:'/login'
-    }
+    { path: '/modifyUserInfo/:id', component: ModifyUserInfo },
+    { path:'/', redirect:'/login'}
 ]
 
 const router = new VueRouter({

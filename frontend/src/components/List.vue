@@ -10,7 +10,10 @@
                         <div>ID：{{item.id}}</div>
                         <div>姓名：{{item.name}}</div>
                         <div>地址：{{item.address}}</div>
-                        <div class="control">操作：<el-button @click="del(item.id,index)" class="quit">删除</el-button></div>
+                        <div class="control">操作：
+                            <el-button type="danger" plain @click="del(item.id,index)" class="controlBtn">删除</el-button>
+                            <el-button type="primary" plain @click="modify(item.id,index)" class="controlBtn">修改</el-button>
+                        </div>
                     </el-collapse-item>
                 </template>
             </el-collapse>
@@ -53,6 +56,9 @@
                     })
 
                 });
+            },
+            "modify":function (id) {
+                this.$router.push("/modifyUserInfo/" + id)
             }
         },
         mounted() {
@@ -72,8 +78,9 @@
         margin-bottom: 20px;
     }
     .control{
-        .quit{
+        .controlBtn{
             float: right;
+            margin-right: 10px;
         }
     }
 </style>

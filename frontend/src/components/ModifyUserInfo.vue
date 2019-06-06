@@ -8,7 +8,7 @@
                             <el-input  v-model="form.name" placeholder="请输入姓名"></el-input>
                         </el-form-item>
                         <el-form-item label="手机号" prop="mobile">
-                            <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
+                            <el-input v-model="form.mobile" placeholder="请输入手机号" :disabled=true></el-input>
                         </el-form-item>
                         <el-form-item label="密码" prop="password">
                             <el-input v-model.trim="form.password" type="password" placeholder="请输入密码"></el-input>
@@ -20,7 +20,7 @@
                             <el-input type="textarea" placeholder="请输入地址" v-model="form.address"></el-input>
                         </el-form-item>
                         <el-form-item class="btn-wrap">
-                            <el-button type="primary" @click="submitForm('form')">立即创建</el-button>
+                            <el-button type="danger" @click="submitForm('form')">修改</el-button>
                             <el-button @click="cancel()">取消</el-button>
                         </el-form-item>
                     </el-form>
@@ -33,7 +33,7 @@
     import req from "../router/request";
 
     export default {
-        name: 'Register',
+        name: 'ModifyUserInfo',
         data() {
             var validateMobile = (rule, value, callback) => {
                     if (value === '') {
@@ -67,11 +67,12 @@
 
             return {
                 form: {
-                    name: '小面',
-                    mobile:'13000000001',
-                    password:'123456',
-                    repassword:'123456',
-                    address: 'Shanghai'
+                    name: '',
+                    mobile:'',
+                    password:'',
+                    repassword:'',
+                    address: '',
+                    id:this.$route.params.id
                 },
                 rules: {
                     name: [
@@ -97,21 +98,21 @@
             submitForm(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.registRequest(this.form)
+                        this.updateUserRequest(this.form)
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
             },
-            registRequest(data){
-                this.axios.get(req.register,{params: {data}}).then((response)  =>{
+            updateUserRequest(data){
+                this.axios.post(req.updateUser,data).then((response)  =>{
                     console.log(response)
                     this.$alert(response.data.msg, '提示', {
                         confirmButtonText: '确定',
                         callback:() =>{
                             if (response.data.status == 200){
-                                this.$router.push("./login");
+                                this.$router.push("../list");
                             }
                         }
                     });
@@ -119,8 +120,22 @@
                 })
             },
             cancel(){
-                this.$router.push("/login")
+                this.$router.push("/list")
             }
+        },
+        mounted() {
+            let userid = this.$route.params.id
+            this.axios.get(req.getuserinfo,{params: {id: userid}}).then((response)  =>{
+                if(response.status == 200){
+                    response.data.data.forEach((val)=> {
+                        this.form.name = val.name;
+                        this.form.password = val.password;
+                        this.form.mobile = val.mobile;
+                        this.form.repassword = val.password;
+                        this.form.address = val.address;
+                    })
+                }
+            });
         }
     }
 </script>
