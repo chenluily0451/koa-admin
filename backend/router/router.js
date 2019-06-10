@@ -97,6 +97,13 @@ router.get("/api/getuserinfo", async function (ctx,next) {
         ctx.body = res.res_success_data("查询成功",getuserinfo_result)
 
     }
+});
+
+// 404
+router.get("*",async (ctx,next)=>{
+    console.log("页面找不到了")
+    ctx.response.status = 404;
+    await ctx.render("404.html")
 })
 
 
