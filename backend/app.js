@@ -20,7 +20,7 @@ const handler = async (ctx, next) =>{
     try{
         await next();
     }catch(err){
-        ctx.respose.status = err.statusCode ||err. status || 500;
+        ctx.response.status = err.statusCode ||err. status || 500;
         ctx.response.type = 'html';
         ctx.response.body = '<p>出错啦</p>';
         ctx.app.emit('error', err, ctx);
