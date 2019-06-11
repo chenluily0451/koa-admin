@@ -5,6 +5,8 @@ module.exports = {
     outputDir: 'dist',
     // eslint-loader 是否在保存的时候检查
     lintOnSave: true,
+    publicPath: "./", // 打包路径  https://segmentfault.com/a/1190000014456796
+    assetsDir:'static', //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
     // webpack配置
     chainWebpack: () => { },
     configureWebpack: () => { },
